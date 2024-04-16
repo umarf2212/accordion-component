@@ -14,7 +14,7 @@ const App: React.FC = () => {
             {/* <Accordion data={sampleData} /> */}
 
             {celebData.map((data) => (
-                <Accordion data={data} />
+                <Accordion data={data} key={`accordion_item_${data.id}`} />
             ))}
         </>
     )
