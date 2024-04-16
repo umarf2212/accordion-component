@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from '../Accordion/Accordion.module.css'
+import styles from './AccordionHeader.module.css'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons'
@@ -18,7 +18,7 @@ const AccordionHeader: React.FC<AccordionHeaderProps> = ({
     toggleAccordionBody,
 }) => {
     return (
-        <>
+        <div className={styles.row}>
             <div className={styles.accordion_user_image}>
                 <img
                     src={picture}
@@ -38,7 +38,7 @@ const AccordionHeader: React.FC<AccordionHeaderProps> = ({
                     <FontAwesomeIcon icon={faChevronDown} />
                 )}
             </div>
-        </>
+        </div>
     )
 }
 export default AccordionHeader
