@@ -41,27 +41,6 @@ const Accordion: React.FC<AccordionProps> = ({ data }) => {
                     showBody={showBody}
                     toggleAccordionBody={toggleAccordionBody}
                 />
-                {/* <div className={styles.accordion_user_image}>
-                    <img
-                        src={data.picture}
-                        width={72}
-                        height={72}
-                        alt="User Thumbnail"
-                    />
-                </div>
-                <div
-                    className={styles.accordion_title}
-                >{`${data.first} ${data.last}`}</div>
-                <div
-                    className={styles.accordion_toggle}
-                    onClick={toggleAccordionBody}
-                >
-                    {showBody ? (
-                        <FontAwesomeIcon icon={faChevronUp} />
-                    ) : (
-                        <FontAwesomeIcon icon={faChevronDown} />
-                    )}
-                </div> */}
             </div>
 
             {showBody && (
