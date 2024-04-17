@@ -35,6 +35,27 @@ h1 {
   line-height: 1.1;
 }
 
+input[type=text],
+select,
+textarea {
+  border: 1px solid rgb(124, 124, 124);
+  border-radius: 10px;
+  padding: 5px 10px;
+  font-size: 1rem;
+  width: 130px;
+}
+
+textarea {
+  width: 95%;
+  min-height: 150px;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+input[type=text].usernameTextField {
+  font-size: 2rem;
+  width: 250px;
+}
+
 /* button {
   border-radius: 8px;
   border: 1px solid transparent;

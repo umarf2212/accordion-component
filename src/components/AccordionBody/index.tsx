@@ -3,32 +3,48 @@ import styles from './AccordionBody.module.css'
 import classnames from 'classnames'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashCan, faPencil } from '@fortawesome/free-solid-svg-icons'
+import EditableCountryText from '../EditableFields/EditableCountryText'
+import { IUserData } from '../Interfaces'
+import EditableDOBText from '../EditableFields/EditableDOBText'
+import EditableGenderDropdown from '../EditableFields/EditableGenderDropdown'
+import EditableDescriptionText from '../EditableFields/EditableDescriptionText'
 
 interface AccordionBodyProps {
-    dob?: string
-    gender: string
-    country: string
-    description: string
+    userDataState: IUserData
+    setUserDataState: React.Dispatch<React.SetStateAction<IUserData>>
+    editMode: boolean
 }
 
 const AccordionBody: React.FC<AccordionBodyProps> = ({
-    gender,
-    country,
-    description,
+    userDataState,
+    setUserDataState,
+    editMode,
 }) => {
     return (
         <div>
             <div className={styles.row}>
                 <div className={classnames(styles.user_data, styles.w_33)}>
                     <span className={styles.data_title}>Age</span>
-                    <span className={styles.data}>19 Years</span>
+                    <span className={styles.data}>
+                        {/* 19 Years */}
+                        <EditableDOBText
+                            userDataState={userDataState}
+                            setUserDataState={setUserDataState}
+                            editMode={editMode}
+                        />
+                    </span>
                 </div>
                 <div className={classnames(styles.user_data, styles.w_33)}>
                     <span className={styles.data_title}>Gender</span>
                     <span
                         className={classnames(styles.data, styles.capitalise)}
                     >
-                        {gender}
+                        <EditableGenderDropdown
+                            userDataState={userDataState}
+                            setUserDataState={setUserDataState}
+                            editMode={editMode}
+                        />
+                        {/* {userDataState.gender} */}
                     </span>
                 </div>
                 <div className={classnames(styles.user_data, styles.w_33)}>
@@ -36,7 +52,12 @@ const AccordionBody: React.FC<AccordionBodyProps> = ({
                     <span
                         className={classnames(styles.data, styles.capitalise)}
                     >
-                        {country}
+                        <EditableCountryText
+                            userDataState={userDataState}
+                            setUserDataState={setUserDataState}
+                            editMode={editMode}
+                        />
+                        {/* {country} */}
                     </span>
                 </div>
             </div>
@@ -44,7 +65,14 @@ const AccordionBody: React.FC<AccordionBodyProps> = ({
             <div className={styles.row}>
                 <div className={styles.user_data}>
                     <span className={styles.data_title}>Description</span>
-                    <span className={styles.data}>{description}</span>
+                    <span className={styles.data}>
+                        <EditableDescriptionText
+                            userDataState={userDataState}
+                            setUserDataState={setUserDataState}
+                            editMode={editMode}
+                        />
+                        {/* {userDataState.description} */}
+                    </span>
                 </div>
             </div>
 
