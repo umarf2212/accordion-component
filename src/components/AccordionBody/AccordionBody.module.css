@@ -23,18 +23,3 @@ div.w_33 {
 .user_data .capitalise {
     text-transform: capitalize;
 }
-
-.accordion_actions {
-    justify-content: flex-end;
-}
-.accordion_actions .icon {
-    font-size: 1.5rem;
-    margin: 5px 10px;
-    cursor: pointer;
-}
-.accordion_actions .icon:first-child {
-    color: red;
-}
-.accordion_actions .icon:last-child {
-    color: blue;
-}

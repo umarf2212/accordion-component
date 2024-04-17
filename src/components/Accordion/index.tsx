@@ -3,6 +3,7 @@ import styles from './Accordion.module.css'
 import AccordionHeader from '../AccordionHeader'
 import AccordionBody from '../AccordionBody'
 import { IUserData } from '../Interfaces'
+import AccordionFooter from '../AccordionFooter'
 
 interface AccordionProps {
     userData: IUserData
@@ -10,6 +11,7 @@ interface AccordionProps {
 
 const Accordion: React.FC<AccordionProps> = ({ userData }) => {
     const [showBody, setShowBody] = useState<boolean>(false)
+    const [editMode, setEditMode] = useState<boolean>(false)
 
     // Storing props data in the state so that it can be edited
     // and updated data can be sent back to the original source
@@ -22,22 +24,37 @@ const Accordion: React.FC<AccordionProps> = ({ userData }) => {
         setShowBody((showBody) => !showBody)
     }
 
+    const saveUpdatedUserData = () => {}
+
+    const cancelUpdatedUserData = () => {
+        setEditMode(false)
+        setUserDataState(userData)
+    }
+
     return (
         <div className={styles.accordion}>
             <AccordionHeader
                 userDataState={userDataState}
                 setUserDataState={setUserDataState}
-                editMode={true}
+                editMode={editMode}
                 showBody={showBody}
                 toggleAccordionBody={toggleAccordionBody}
             />
 
             {showBody && (
-                <AccordionBody
-                    userDataState={userDataState}
-                    setUserDataState={setUserDataState}
-                    editMode={true}
-                />
+                <>
+                    <AccordionBody
+                        userDataState={userDataState}
+                        setUserDataState={setUserDataState}
+                        editMode={editMode}
+                    />
+                    <AccordionFooter
+                        editMode={editMode}
+                        setEditMode={setEditMode}
+                        saveUpdatedUserData={saveUpdatedUserData}
+                        cancelUpdatedUserData={cancelUpdatedUserData}
+                    />
+                </>
             )}
         </div>
     )

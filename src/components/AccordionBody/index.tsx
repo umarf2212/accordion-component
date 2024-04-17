@@ -1,8 +1,6 @@
 import React from 'react'
 import styles from './AccordionBody.module.css'
 import classnames from 'classnames'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrashCan, faPencil } from '@fortawesome/free-solid-svg-icons'
 import EditableCountryText from '../EditableFields/EditableCountryText'
 import { IUserData } from '../Interfaces'
 import EditableDOBText from '../EditableFields/EditableDOBText'
@@ -44,7 +42,6 @@ const AccordionBody: React.FC<AccordionBodyProps> = ({
                             setUserDataState={setUserDataState}
                             editMode={editMode}
                         />
-                        {/* {userDataState.gender} */}
                     </span>
                 </div>
                 <div className={classnames(styles.user_data, styles.w_33)}>
@@ -57,7 +54,6 @@ const AccordionBody: React.FC<AccordionBodyProps> = ({
                             setUserDataState={setUserDataState}
                             editMode={editMode}
                         />
-                        {/* {country} */}
                     </span>
                 </div>
             </div>
@@ -71,18 +67,7 @@ const AccordionBody: React.FC<AccordionBodyProps> = ({
                             setUserDataState={setUserDataState}
                             editMode={editMode}
                         />
-                        {/* {userDataState.description} */}
                     </span>
-                </div>
-            </div>
-
-            <div className={classnames(styles.row, styles.accordion_actions)}>
-                <div>
-                    <FontAwesomeIcon
-                        icon={faTrashCan}
-                        className={styles.icon}
-                    />
-                    <FontAwesomeIcon icon={faPencil} className={styles.icon} />
                 </div>
             </div>
         </div>
