@@ -20,27 +20,31 @@ const AccordionBody: React.FC<AccordionBodyProps> = ({
         <div>
             <div className={styles.row}>
                 <div className={classnames(styles.user_data, styles.w_33)}>
-                    <div className={styles.data_title}>Age</div>
-                    <div className={styles.data}>19 Years</div>
+                    <span className={styles.data_title}>Age</span>
+                    <span className={styles.data}>19 Years</span>
                 </div>
                 <div className={classnames(styles.user_data, styles.w_33)}>
-                    <div className={styles.data_title}>Gender</div>
-                    <div className={classnames(styles.data, styles.capitalise)}>
+                    <span className={styles.data_title}>Gender</span>
+                    <span
+                        className={classnames(styles.data, styles.capitalise)}
+                    >
                         {gender}
-                    </div>
+                    </span>
                 </div>
                 <div className={classnames(styles.user_data, styles.w_33)}>
-                    <div className={styles.data_title}>Country</div>
-                    <div className={classnames(styles.data, styles.capitalise)}>
+                    <span className={styles.data_title}>Country</span>
+                    <span
+                        className={classnames(styles.data, styles.capitalise)}
+                    >
                         {country}
-                    </div>
+                    </span>
                 </div>
             </div>
 
             <div className={styles.row}>
                 <div className={styles.user_data}>
-                    <div className={styles.data_title}>Description</div>
-                    <div className={styles.data}>{description}</div>
+                    <span className={styles.data_title}>Description</span>
+                    <span className={styles.data}>{description}</span>
                 </div>
             </div>
 

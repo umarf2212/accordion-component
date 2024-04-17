@@ -1,44 +1,53 @@
-import React, { useState } from 'react'
+import React, { MouseEventHandler, useState } from 'react'
 import styles from './Accordion.module.css'
 import AccordionHeader from '../AccordionHeader'
 import AccordionBody from '../AccordionBody'
 
+interface UserData {
+    id: number
+    picture: string
+    first: string
+    last: string
+    dob: string
+    gender: string
+    email: string
+    country: string
+    description: string
+}
 interface AccordionProps {
-    data: {
-        id: number
-        picture: string
-        first: string
-        last: string
-        dob: string
-        gender: string
-        email: string
-        country: string
-        description: string
-    }
+    userData: UserData
 }
 
-const Accordion: React.FC<AccordionProps> = ({ data }) => {
+const Accordion: React.FC<AccordionProps> = ({ userData }) => {
     const [showBody, setShowBody] = useState<boolean>(false)
 
-    const toggleAccordionBody = (): void => {
+    // Storing props data in the state so that it can be edited
+    // and updated data can be sent back to the original source
+    // (either the NoSQL API or to the originally fetched array)
+    const [userDataState, setUserDataState] = useState(userData)
+
+    const toggleAccordionBody: MouseEventHandler<HTMLDivElement> = (e) => {
+        e.preventDefault()
+        e.stopPropagation()
         setShowBody((showBody) => !showBody)
     }
 
     return (
         <div className={styles.accordion}>
             <AccordionHeader
-                picture={data.picture}
-                fullName={`${data.first} ${data.last}`}
+                picture={userDataState.picture}
+                firstName={userDataState.first}
+                lastName={userDataState.last}
                 showBody={showBody}
                 toggleAccordionBody={toggleAccordionBody}
             />
 
             {showBody && (
                 <AccordionBody
-                    dob={data.dob}
-                    gender={data.gender}
-                    country={data.country}
-                    description={data.description}
+                    dob={userDataState.dob}
+                    gender={userDataState.gender}
+                    country={userDataState.country}
+                    description={userDataState.description}
                 />
             )}
         </div>

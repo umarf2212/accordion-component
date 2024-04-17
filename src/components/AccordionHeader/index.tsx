@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { MouseEventHandler } from 'react'
 import styles from './AccordionHeader.module.css'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -6,14 +6,16 @@ import { faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons'
 
 interface AccordionHeaderProps {
     picture: string
-    fullName: string
+    firstName: string
+    lastName: string
     showBody: boolean
-    toggleAccordionBody: () => void
+    toggleAccordionBody: MouseEventHandler<HTMLDivElement>
 }
 
 const AccordionHeader: React.FC<AccordionHeaderProps> = ({
     picture,
-    fullName,
+    firstName,
+    lastName,
     showBody,
     toggleAccordionBody,
 }) => {
@@ -27,7 +29,9 @@ const AccordionHeader: React.FC<AccordionHeaderProps> = ({
                     alt="User Thumbnail"
                 />
             </div>
-            <div className={styles.accordion_title}>{fullName}</div>
+            <div
+                className={styles.accordion_title}
+            >{`${firstName} ${lastName}`}</div>
             <div
                 className={styles.accordion_toggle}
                 onClick={toggleAccordionBody}
