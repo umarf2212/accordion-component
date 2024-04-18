@@ -8,12 +8,15 @@ import {
     faCircleXmark,
 } from '@fortawesome/free-solid-svg-icons'
 import classnames from 'classnames'
+import { IUserData } from '../Interfaces'
 
 interface AccordionFooterProps {
     editMode: boolean
     setEditMode: React.Dispatch<React.SetStateAction<boolean>>
     saveUpdatedUserData: () => void
     cancelUpdatedUserData: () => void
+    deleteUserData: (id: number) => void
+    userDataState: IUserData
 }
 
 const AccordionFooter: React.FC<AccordionFooterProps> = ({
@@ -21,6 +24,8 @@ const AccordionFooter: React.FC<AccordionFooterProps> = ({
     setEditMode,
     saveUpdatedUserData,
     cancelUpdatedUserData,
+    deleteUserData,
+    userDataState,
 }) => {
     return (
         <div className={classnames(styles.row, styles.accordion_actions)}>
@@ -42,6 +47,7 @@ const AccordionFooter: React.FC<AccordionFooterProps> = ({
                     <FontAwesomeIcon
                         icon={faTrashCan}
                         className={classnames(styles.icon, styles.deleteIcon)}
+                        onClick={() => deleteUserData(userDataState.id)}
                     />
                     <FontAwesomeIcon
                         icon={faPencil}

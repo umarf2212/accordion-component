@@ -7,9 +7,15 @@ import AccordionFooter from '../AccordionFooter'
 
 interface AccordionProps {
     userData: IUserData
+    updateCelebData: (updateCelebData: IUserData) => void
+    deleteCelebData: (id: number) => void
 }
 
-const Accordion: React.FC<AccordionProps> = ({ userData }) => {
+const Accordion: React.FC<AccordionProps> = ({
+    userData,
+    updateCelebData,
+    deleteCelebData,
+}) => {
     const [showBody, setShowBody] = useState<boolean>(false)
     const [editMode, setEditMode] = useState<boolean>(false)
 
@@ -24,7 +30,14 @@ const Accordion: React.FC<AccordionProps> = ({ userData }) => {
         setShowBody((showBody) => !showBody)
     }
 
-    const saveUpdatedUserData = () => {}
+    const saveUpdatedUserData = () => {
+        updateCelebData(userDataState)
+        setEditMode(false)
+    }
+
+    const deleteUserData = (id: number) => {
+        deleteCelebData(id)
+    }
 
     const cancelUpdatedUserData = () => {
         setEditMode(false)
@@ -53,6 +66,8 @@ const Accordion: React.FC<AccordionProps> = ({ userData }) => {
                         setEditMode={setEditMode}
                         saveUpdatedUserData={saveUpdatedUserData}
                         cancelUpdatedUserData={cancelUpdatedUserData}
+                        deleteUserData={deleteUserData}
+                        userDataState={userDataState}
                     />
                 </>
             )}
