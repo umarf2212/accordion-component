@@ -4,9 +4,9 @@ You have to create a system where you can view and edit their details to hide th
 
 Your mission if you choose to accept it, you have to:
 
--✅ : Fully implemented
--🟧 : Partially implemented
--🎯 : To be done
+- ✅ : Fully implemented
+- 🟧 : Partially implemented
+- 🎯 : To be done
 
 1. Create the user interface provided with the design provided  ✅
 
