@@ -9,6 +9,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import classnames from 'classnames'
 import { IUserData } from '../Interfaces'
+import calculateYearsSince from '../../utils/convertDateToYears'
 
 interface AccordionFooterProps {
     editMode: boolean
@@ -17,6 +18,7 @@ interface AccordionFooterProps {
     cancelUpdatedUserData: () => void
     deleteUserData: (id: number) => void
     userDataState: IUserData
+    saveButton: boolean
 }
 
 const AccordionFooter: React.FC<AccordionFooterProps> = ({
@@ -26,6 +28,7 @@ const AccordionFooter: React.FC<AccordionFooterProps> = ({
     cancelUpdatedUserData,
     deleteUserData,
     userDataState,
+    saveButton,
 }) => {
     return (
         <div className={classnames(styles.row, styles.accordion_actions)}>
@@ -39,7 +42,7 @@ const AccordionFooter: React.FC<AccordionFooterProps> = ({
                     <FontAwesomeIcon
                         icon={faCircleCheck}
                         className={classnames(styles.icon, styles.checkIcon)}
-                        onClick={saveUpdatedUserData}
+                        onClick={() => saveButton && saveUpdatedUserData()}
                     />
                 </div>
             ) : (
@@ -52,7 +55,11 @@ const AccordionFooter: React.FC<AccordionFooterProps> = ({
                     <FontAwesomeIcon
                         icon={faPencil}
                         className={classnames(styles.icon, styles.editIcon)}
-                        onClick={() => setEditMode(true)}
+                        onClick={() =>
+                            Number(
+                                calculateYearsSince(new Date(userDataState.dob))
+                            ) >= 18 && setEditMode(true)
+                        }
                     />
                 </div>
             )}

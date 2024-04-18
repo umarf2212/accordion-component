@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 import { IUserData } from '../../Interfaces'
 
 interface EditableDescriptionTextProps {
@@ -13,6 +13,14 @@ const EditableDescriptionText: React.FC<EditableDescriptionTextProps> = ({
     setUserDataState,
 }) => {
     const [description, setDescription] = useState(userDataState.description)
+
+    // when there's a change in userDataState such as when
+    // it was edited or the edit was canceled, then re-update
+    // internal state of this component
+    useEffect(() => {
+        setDescription(userDataState.description)
+    }, [userDataState])
+
     const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         const newDescriptionText: string = e.target.value
         setDescription(newDescriptionText)
@@ -21,6 +29,8 @@ const EditableDescriptionText: React.FC<EditableDescriptionTextProps> = ({
     const handleFocusLost = () => {
         if (description.length > 0) {
             setUserDataState({ ...userDataState, description })
+        } else {
+            setDescription(userDataState.description)
         }
     }
 
@@ -32,7 +42,7 @@ const EditableDescriptionText: React.FC<EditableDescriptionTextProps> = ({
         <textarea
             onBlur={handleFocusLost}
             onChange={handleChange}
-            defaultValue={description}
+            value={description}
         />
     )
 }

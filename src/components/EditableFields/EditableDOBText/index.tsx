@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 import { IUserData } from '../../Interfaces'
 import calculateYearsSince from '../../../utils/convertDateToYears'
 
@@ -14,14 +14,28 @@ const EditableDOBText: React.FC<EditableTextProps> = ({
     setUserDataState,
 }) => {
     const [dob, setDob] = useState(userDataState.dob)
+
+    // when there's a change in userDataState such as when
+    // it was edited or the edit was canceled, then re-update
+    // internal state of this component
+    useEffect(() => {
+        setDob(userDataState.dob)
+    }, [userDataState])
+
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const newDobText: string = e.target.value
-        setDob(newDobText)
+        const regex = /^\d{0,4}-\d{0,2}-\d{0,2}$/
+        if (regex.test(newDobText)) {
+            setDob(newDobText)
+        }
     }
 
     const handleFocusLost = () => {
-        if (dob.length > 0) {
+        const regex = /^\d{4}-\d{1,2}-\d{1,2}$/
+        if (dob.length > 0 && regex.test(dob)) {
             setUserDataState({ ...userDataState, dob })
+        } else {
+            setDob(userDataState.dob)
         }
     }
 
@@ -35,6 +49,8 @@ const EditableDOBText: React.FC<EditableTextProps> = ({
             value={dob}
             onBlur={handleFocusLost}
             onChange={handleChange}
+            pattern="\d{0,4}-\d{0,2}-\d{0,2}"
+            id="dob"
         />
     )
 }

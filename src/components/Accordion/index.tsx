@@ -1,9 +1,10 @@
-import React, { MouseEventHandler, useState } from 'react'
+import React, { MouseEventHandler, useEffect, useState } from 'react'
 import styles from './Accordion.module.css'
 import AccordionHeader from '../AccordionHeader'
 import AccordionBody from '../AccordionBody'
 import { IUserData } from '../Interfaces'
 import AccordionFooter from '../AccordionFooter'
+import _ from 'lodash'
 
 interface AccordionProps {
     userData: IUserData
@@ -18,6 +19,7 @@ const Accordion: React.FC<AccordionProps> = ({
 }) => {
     const [showBody, setShowBody] = useState<boolean>(false)
     const [editMode, setEditMode] = useState<boolean>(false)
+    const [saveButton, setSaveButton] = useState<boolean>(false)
 
     // Storing props data in the state so that it can be edited
     // and updated data can be sent back to the original source
@@ -30,13 +32,27 @@ const Accordion: React.FC<AccordionProps> = ({
         setShowBody((showBody) => !showBody)
     }
 
+    // save button is disabled if the original data obj and
+    // edited data obj are not equal (deep copy using _isEqual from lodash)
+    // only enalbed when the two objects change
+    useEffect(() => {
+        if (!_.isEqual(userDataState, userData)) {
+            setSaveButton(true)
+        } else {
+            setSaveButton(false)
+        }
+    }, [userDataState])
+
     const saveUpdatedUserData = () => {
         updateCelebData(userDataState)
         setEditMode(false)
     }
 
     const deleteUserData = (id: number) => {
-        deleteCelebData(id)
+        const result = confirm('Are you sure you want to delete?')
+        if (result) {
+            deleteCelebData(id)
+        }
     }
 
     const cancelUpdatedUserData = () => {
@@ -68,6 +84,7 @@ const Accordion: React.FC<AccordionProps> = ({
                         cancelUpdatedUserData={cancelUpdatedUserData}
                         deleteUserData={deleteUserData}
                         userDataState={userDataState}
+                        saveButton={saveButton}
                     />
                 </>
             )}

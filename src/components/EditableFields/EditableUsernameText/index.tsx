@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 import { IUserData } from '../../Interfaces'
 
 interface EditableUsernameTextProps {
@@ -15,6 +15,14 @@ const EditableUsernameText: React.FC<EditableUsernameTextProps> = ({
     const [fullName, setFullName] = useState(
         `${userDataState.first} ${userDataState.last}`
     )
+
+    // when there's a change in userDataState such as when
+    // it was edited or the edit was canceled, then re-update
+    // internal state of this component
+    useEffect(() => {
+        setFullName(`${userDataState.first} ${userDataState.last}`)
+    }, [userDataState])
+
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const fullNameText: string = e.target.value
         setFullName(fullNameText)
