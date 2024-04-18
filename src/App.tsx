@@ -1,21 +1,43 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './App.css'
 import Accordion from './components/Accordion'
 import celebData from '../public/celebrities.json'
-
-// const sampleData = celebData[0]
+import { IUserData } from './components/Interfaces'
 
 const App: React.FC = () => {
-    // const [count, setCount] = useState(0)
+    const [celebDataState, setCelebDataState] = useState<IUserData[]>(celebData)
+
+    const updateCelebData = (newCelebData: IUserData) => {
+        const updatedCelebData = celebDataState.map((dataObj: IUserData) => {
+            if (dataObj.id === newCelebData.id) {
+                return { ...dataObj, ...newCelebData }
+            }
+            return dataObj
+        })
+        setCelebDataState(updatedCelebData)
+    }
+
+    const deleteCelebData = (id: number) => {
+        const updatedCelebData = celebDataState.filter(
+            (dataObj) => dataObj.id !== id
+        )
+        setCelebDataState(updatedCelebData)
+    }
 
     return (
         <>
             <h1>Accordion</h1>
             {/* <Accordion data={sampleData} /> */}
 
-            {celebData.map((data) => (
-                <Accordion userData={data} key={`accordion_item_${data.id}`} />
-            ))}
+            {celebDataState &&
+                celebDataState.map((data) => (
+                    <Accordion
+                        userData={data}
+                        key={`accordion_item_${data.id}`}
+                        updateCelebData={updateCelebData}
+                        deleteCelebData={deleteCelebData}
+                    />
+                ))}
         </>
     )
 }
