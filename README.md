@@ -59,6 +59,8 @@ This approach is more memory efficient.
 This makes highly reusable set of components that allow text to be edited.
 It will take a setter function as a prop to change the data that it edits.
 
+[Accordion.pdf](https://github.com/umarf2212/accordion-component/files/15024840/Accordion.pdf)
+
 # React + TypeScript + Vite - Vite generated Readme below
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
