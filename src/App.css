@@ -4,3 +4,13 @@
   padding: 2rem;
   /* text-align: center; */
 }
+
+.app_wrapper {
+  width: 500px;
+}
+
+.accordion_search {
+  margin-bottom: 30px;
+  width: 100% !important;
+  padding: 10px 15px;
+}
