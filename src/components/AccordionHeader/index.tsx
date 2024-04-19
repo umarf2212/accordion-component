@@ -9,8 +9,8 @@ import { IUserData } from '../Interfaces'
 interface AccordionHeaderProps {
     userDataState: IUserData
     setUserDataState: React.Dispatch<React.SetStateAction<IUserData>>
-    editMode: boolean
-    showBody: boolean
+    editMode: number
+    activeAccordion: number
     toggleAccordionBody: MouseEventHandler<HTMLDivElement>
 }
 
@@ -18,7 +18,7 @@ const AccordionHeader: React.FC<AccordionHeaderProps> = ({
     userDataState,
     setUserDataState,
     editMode,
-    showBody,
+    activeAccordion,
     toggleAccordionBody,
 }) => {
     return (
@@ -40,9 +40,9 @@ const AccordionHeader: React.FC<AccordionHeaderProps> = ({
             </div>
             <div
                 className={styles.accordion_toggle}
-                onClick={toggleAccordionBody}
+                onClick={(e) => editMode === -1 && toggleAccordionBody(e)}
             >
-                {showBody ? (
+                {activeAccordion === userDataState.id ? (
                     <FontAwesomeIcon icon={faChevronUp} />
                 ) : (
                     <FontAwesomeIcon icon={faChevronDown} />

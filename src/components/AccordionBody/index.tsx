@@ -10,7 +10,7 @@ import EditableDescriptionText from '../EditableFields/EditableDescriptionText'
 interface AccordionBodyProps {
     userDataState: IUserData
     setUserDataState: React.Dispatch<React.SetStateAction<IUserData>>
-    editMode: boolean
+    editMode: number
 }
 
 const AccordionBody: React.FC<AccordionBodyProps> = ({

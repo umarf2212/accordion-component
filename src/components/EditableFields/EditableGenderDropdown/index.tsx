@@ -3,7 +3,7 @@ import { IUserData } from '../../Interfaces'
 
 interface EditableDropdownProps {
     userDataState: IUserData
-    editMode: boolean
+    editMode: number
     setUserDataState: React.Dispatch<React.SetStateAction<IUserData>>
 }
 
@@ -24,7 +24,7 @@ const EditableGenderDropdown: React.FC<EditableDropdownProps> = ({
         }
     }
 
-    if (!editMode) {
+    if (editMode !== userDataState.id) {
         return `${userDataState.gender}`
     }
 

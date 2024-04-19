@@ -14,6 +14,7 @@ div.w_33 {
 
 .user_data .data_title {
     color: rgb(124, 124, 124);
+    user-select: none;
 }
 .user_data .data, 
 .user_data .data_title {

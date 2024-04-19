@@ -3,7 +3,7 @@ import { IUserData } from '../../Interfaces'
 
 interface EditableCountryTextProps {
     userDataState: IUserData
-    editMode: boolean
+    editMode: number
     setUserDataState: React.Dispatch<React.SetStateAction<IUserData>>
 }
 
@@ -37,7 +37,7 @@ const EditableCountryText: React.FC<EditableCountryTextProps> = ({
         }
     }
 
-    if (!editMode) {
+    if (editMode !== userDataState.id) {
         return `${userDataState.country}`
     }
 

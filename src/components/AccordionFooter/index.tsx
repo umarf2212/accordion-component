@@ -12,8 +12,8 @@ import { IUserData } from '../Interfaces'
 import calculateYearsSince from '../../utils/convertDateToYears'
 
 interface AccordionFooterProps {
-    editMode: boolean
-    setEditMode: React.Dispatch<React.SetStateAction<boolean>>
+    editMode: number
+    setEditMode: React.Dispatch<React.SetStateAction<number>>
     saveUpdatedUserData: () => void
     cancelUpdatedUserData: () => void
     deleteUserData: (id: number) => void
@@ -32,7 +32,7 @@ const AccordionFooter: React.FC<AccordionFooterProps> = ({
 }) => {
     return (
         <div className={classnames(styles.row, styles.accordion_actions)}>
-            {editMode ? (
+            {editMode === userDataState.id ? (
                 <div>
                     <FontAwesomeIcon
                         icon={faCircleXmark}
@@ -58,7 +58,7 @@ const AccordionFooter: React.FC<AccordionFooterProps> = ({
                         onClick={() =>
                             Number(
                                 calculateYearsSince(new Date(userDataState.dob))
-                            ) >= 18 && setEditMode(true)
+                            ) >= 18 && setEditMode(userDataState.id)
                         }
                     />
                 </div>
