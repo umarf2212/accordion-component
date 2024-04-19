@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './AccordionFooter.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
@@ -10,6 +10,7 @@ import {
 import classnames from 'classnames'
 import { IUserData } from '../Interfaces'
 import calculateYearsSince from '../../utils/convertDateToYears'
+import DialogModal from '../DialogModal'
 
 interface AccordionFooterProps {
     editMode: number
@@ -30,6 +31,8 @@ const AccordionFooter: React.FC<AccordionFooterProps> = ({
     userDataState,
     saveButton,
 }) => {
+    const [deleteDialogVisibility, setDeleteDialogVisibility] =
+        useState<boolean>(false)
     return (
         <div className={classnames(styles.row, styles.accordion_actions)}>
             {editMode === userDataState.id ? (
@@ -50,7 +53,7 @@ const AccordionFooter: React.FC<AccordionFooterProps> = ({
                     <FontAwesomeIcon
                         icon={faTrashCan}
                         className={classnames(styles.icon, styles.deleteIcon)}
-                        onClick={() => deleteUserData(userDataState.id)}
+                        onClick={() => setDeleteDialogVisibility(true)}
                     />
                     <FontAwesomeIcon
                         icon={faPencil}
@@ -62,6 +65,17 @@ const AccordionFooter: React.FC<AccordionFooterProps> = ({
                         }
                     />
                 </div>
+            )}
+
+            {deleteDialogVisibility && (
+                <DialogModal
+                    confirmationHandler={() => {
+                        deleteUserData(userDataState.id)
+                        setDeleteDialogVisibility(false)
+                    }}
+                    cancelHandler={() => setDeleteDialogVisibility(false)}
+                    setVisibility={setDeleteDialogVisibility}
+                />
             )}
         </div>
     )

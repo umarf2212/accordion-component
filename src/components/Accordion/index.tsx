@@ -58,10 +58,7 @@ const Accordion: React.FC<AccordionProps> = ({
     }
 
     const deleteUserData = (id: number) => {
-        const result = confirm('Are you sure you want to delete?')
-        if (result) {
-            deleteCelebData(id)
-        }
+        deleteCelebData(id)
     }
 
     const cancelUpdatedUserData = () => {
