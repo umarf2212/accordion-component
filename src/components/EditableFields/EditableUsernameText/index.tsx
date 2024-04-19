@@ -3,7 +3,7 @@ import { IUserData } from '../../Interfaces'
 
 interface EditableUsernameTextProps {
     userDataState: IUserData
-    editMode: boolean
+    editMode: number
     setUserDataState: React.Dispatch<React.SetStateAction<IUserData>>
 }
 
@@ -39,7 +39,7 @@ const EditableUsernameText: React.FC<EditableUsernameTextProps> = ({
         }
     }
 
-    if (!editMode) {
+    if (editMode !== userDataState.id) {
         return `${userDataState.first} ${userDataState.last}`
     }
 
@@ -50,6 +50,7 @@ const EditableUsernameText: React.FC<EditableUsernameTextProps> = ({
             onBlur={handleFocusLost}
             onChange={handleChange}
             className="usernameTextField"
+            id="fullname"
         />
     )
 }

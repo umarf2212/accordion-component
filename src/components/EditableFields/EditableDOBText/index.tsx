@@ -4,7 +4,7 @@ import calculateYearsSince from '../../../utils/convertDateToYears'
 
 interface EditableTextProps {
     userDataState: IUserData
-    editMode: boolean
+    editMode: number
     setUserDataState: React.Dispatch<React.SetStateAction<IUserData>>
 }
 
@@ -39,7 +39,7 @@ const EditableDOBText: React.FC<EditableTextProps> = ({
         }
     }
 
-    if (!editMode) {
+    if (editMode !== userDataState.id) {
         return `${calculateYearsSince(new Date(dob))} Years`
     }
 

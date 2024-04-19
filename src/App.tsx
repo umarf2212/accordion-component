@@ -6,6 +6,8 @@ import { IUserData } from './components/Interfaces'
 
 const App: React.FC = () => {
     const [celebDataState, setCelebDataState] = useState<IUserData[]>(celebData)
+    const [activeAccordion, setActiveAccordion] = useState<number>(1)
+    const [editMode, setEditMode] = useState<number>(-1)
 
     const updateCelebData = (newCelebData: IUserData) => {
         const updatedCelebData = celebDataState.map((dataObj: IUserData) => {
@@ -47,6 +49,7 @@ const App: React.FC = () => {
                 className="accordion_search"
                 onChange={handleSearchChange}
                 onBlur={resetSearch}
+                id="accordion_search"
             />
 
             {celebDataState &&
@@ -56,6 +59,10 @@ const App: React.FC = () => {
                         key={`accordion_item_${data.id}`}
                         updateCelebData={updateCelebData}
                         deleteCelebData={deleteCelebData}
+                        activeAccordion={activeAccordion}
+                        setActiveAccordion={setActiveAccordion}
+                        editMode={editMode}
+                        setEditMode={setEditMode}
                     />
                 ))}
         </div>

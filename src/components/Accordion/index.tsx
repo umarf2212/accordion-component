@@ -10,15 +10,22 @@ interface AccordionProps {
     userData: IUserData
     updateCelebData: (updateCelebData: IUserData) => void
     deleteCelebData: (id: number) => void
+    activeAccordion: number
+    setActiveAccordion: React.Dispatch<React.SetStateAction<number>>
+    editMode: number
+    setEditMode: React.Dispatch<React.SetStateAction<number>>
 }
 
 const Accordion: React.FC<AccordionProps> = ({
     userData,
     updateCelebData,
     deleteCelebData,
+    activeAccordion,
+    setActiveAccordion,
+    editMode,
+    setEditMode,
 }) => {
-    const [showBody, setShowBody] = useState<boolean>(false)
-    const [editMode, setEditMode] = useState<boolean>(false)
+    // const [editMode, setEditMode] = useState<boolean>(false)
     const [saveButton, setSaveButton] = useState<boolean>(false)
 
     // Storing props data in the state so that it can be edited
@@ -26,10 +33,12 @@ const Accordion: React.FC<AccordionProps> = ({
     // (either the NoSQL API or to the originally fetched array)
     const [userDataState, setUserDataState] = useState<IUserData>(userData)
 
-    const toggleAccordionBody: MouseEventHandler<HTMLDivElement> = (e) => {
-        e.preventDefault()
-        e.stopPropagation()
-        setShowBody((showBody) => !showBody)
+    const toggleAccordionBody: MouseEventHandler<HTMLDivElement> = () => {
+        if (activeAccordion === userData.id) {
+            setActiveAccordion(-1)
+        } else {
+            setActiveAccordion(userData.id)
+        }
     }
 
     // save button is disabled if the original data obj and
@@ -45,18 +54,15 @@ const Accordion: React.FC<AccordionProps> = ({
 
     const saveUpdatedUserData = () => {
         updateCelebData(userDataState)
-        setEditMode(false)
+        setEditMode(-1)
     }
 
     const deleteUserData = (id: number) => {
-        const result = confirm('Are you sure you want to delete?')
-        if (result) {
-            deleteCelebData(id)
-        }
+        deleteCelebData(id)
     }
 
     const cancelUpdatedUserData = () => {
-        setEditMode(false)
+        setEditMode(-1)
         setUserDataState(userData)
     }
 
@@ -66,11 +72,11 @@ const Accordion: React.FC<AccordionProps> = ({
                 userDataState={userDataState}
                 setUserDataState={setUserDataState}
                 editMode={editMode}
-                showBody={showBody}
+                activeAccordion={activeAccordion}
                 toggleAccordionBody={toggleAccordionBody}
             />
 
-            {showBody && (
+            {activeAccordion === userData.id && (
                 <>
                     <AccordionBody
                         userDataState={userDataState}

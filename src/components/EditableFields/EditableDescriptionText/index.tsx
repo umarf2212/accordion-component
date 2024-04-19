@@ -3,7 +3,7 @@ import { IUserData } from '../../Interfaces'
 
 interface EditableDescriptionTextProps {
     userDataState: IUserData
-    editMode: boolean
+    editMode: number
     setUserDataState: React.Dispatch<React.SetStateAction<IUserData>>
 }
 
@@ -34,7 +34,7 @@ const EditableDescriptionText: React.FC<EditableDescriptionTextProps> = ({
         }
     }
 
-    if (!editMode) {
+    if (editMode !== userDataState.id) {
         return `${userDataState.description}`
     }
 
